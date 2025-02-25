@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="LogoPagina.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chewy&family=Rubik+Spray+Paint&display=swap"
+      rel="stylesheet"
+    />
+    <title>Tu Carrito</title>
+    <style>
+      body{
+        margin: auto;
+      }
+      .cart{
+        background: #2b2b40;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        margin: 0 100px;
+      }
+      .flex-buttons-cart{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .comprar{
+            appearance: none;
+            background-color: #FFFFFF;
+            border-width: 0;
+            box-sizing: border-box;
+            color:rgb(83, 83, 145);
+            cursor: pointer;
+            display: inline-block;
+            font-family: Clarkson, Helvetica, sans-serif;
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 1em;
+            margin: 0;
+            opacity: 1;
+            outline: 0;
+            padding: 1.5em 2.2em;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            text-rendering: geometricprecision;
+            text-transform: uppercase;
+            transition: opacity 600ms cubic-bezier(.694, 0, 0.335, 1), background-color 300ms cubic-bezier(.694, 0, 0.335, 1), color 800ms cubic-bezier(.694, 0, 0.335, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            white-space: nowrap;
+            letter-spacing: 1px;
+            margin-right: 40px;
+      }
+
+      .comprar::before{
+            background-color:rgb(81, 81, 163);
+            clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+            content: "";
+            height: 101%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transform: translateZ(0);
+            transition: clip-path 1.5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path 1.5s cubic-bezier(.165, 0.84, 0.44, 1);
+            width: 101%;
+            border-radius: 5px;
+      }
+
+      .comprar:hover:before {
+            clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+      }
+
+      .comprar:after {
+            content: "Comprar";
+            text-align: center;
+            font-size: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity, scale 1s ease-out;
+            color: white;
+      }
+
+      .comprar:hover:after {
+            opacity: 1;
+            scale: 1.05;
+      }
+
+      .comprar span {
+            z-index: 1;
+            position: relative;
+        }
+      
+      img{
+        width: 300px;
+        height: 300px;
+      }
+
+      .carrito-title{
+        font-size: 26px;
+      }
+
+      .carrito-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgb(50, 50, 99);
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        margin: 10px 0;
+        max-width: 30%;
+    }
+
+    .carrito-info {
+        color: white;
+        font-size: 16px;
+    }
+
+    .carrito-imagen {
+        width: 100px;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    #iva{
+      font-size: 12px;
+      opacity: 0.5;
+    }
+
+    .eliminar-btn{
+      background-color: transparent;
+    }
+
+    </style>
+  </head>
+  <body>
+    <nav class="nav-secundario">
+      <h3 id="titulo-looplab">LoopLab</h3>
+      <a href="../index/intermodular.html">Volver al Inicio</a>
+      <a href="instrumentales.php">Explorar más instrumentales</a>
+    </nav>
+    <br><br>
+    <section class="cart">
+    <h3 class="carrito-title">Carrito de Compras</h3>
+    <div id="carrito-lista">
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            let carritoLista = document.getElementById("carrito-lista");
+        
+            if (carrito.length === 0) {
+                carritoLista.innerHTML = "<p>No hay productos en el carrito.</p>";
+                return;
+            }
+            carritoLista.innerHTML = carrito.map(item => `
+                <div class="carrito-item">
+                    <div class="carrito-info">
+                        <h3>${item.titulo}</h3>
+                        <p><strong>Precio:</strong> ${item.precio} €</p>
+                        <p><strong>BPM:</strong> ${item.bpm}</p>
+                    </div>
+                    <img src="${item.imagen}" alt="Imagen de ${item.titulo}" class="carrito-imagen">
+                </div>
+            `).join("");
+        });
+        </script>        
+    </div>
+    <p id="total-price"><b>Total:</b> 0€</p>
+    <p id="iva">IVA no incluido.</p>
+    <div class="flex-buttons-cart">
+      <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+      <button class="comprar">Comprar</button>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          mostrarCarrito();
+      });
+      
+      function mostrarCarrito() {
+          let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+          let carritoLista = document.getElementById("carrito-lista");
+          let totalTexto = document.getElementById("total-price");
+          let total = 0;
+      
+          if (carrito.length === 0) {
+              carritoLista.innerHTML = "<p>No hay instrumentales en el carrito.</p>";
+              totalTexto.innerHTML = "<b>Total:</b> 0€";
+              return;
+          }
+      
+          carritoLista.innerHTML = carrito.map((item, index) => {
+              total += parseFloat(item.precio);
+      
+              return `
+                  <div class="carrito-item">
+                      <div class="carrito-info">
+                          <h3>${item.titulo}</h3>
+                          <p><strong>Precio:</strong> ${parseFloat(item.precio).toFixed(2)} €</p>
+                          <p><strong>BPM:</strong> ${item.bpm}</p>
+                      </div>
+                      <img src="${item.imagen}" alt="Imagen de ${item.titulo}" class="carrito-imagen">
+                      <button class="eliminar-btn" onclick="eliminarDelCarrito(${index})">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-x" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M6.146 8.146a.5.5 0 0 1 .708 0L8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 0 1 0-.708"/>
+                              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                          </svg>
+                      </button>
+                  </div>
+              `;
+          }).join("");
+      
+          totalTexto.innerHTML = `<b>Total:</b> ${total.toFixed(2)}€`;
+      }
+      
+      function eliminarDelCarrito(index) {
+          let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+          carrito.splice(index, 1);
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+          mostrarCarrito();
+      }
+      
+      function vaciarCarrito() {
+          localStorage.removeItem("carrito");
+          mostrarCarrito();
+      }
+      </script>
+      </section>
+  </body>
+</html>
