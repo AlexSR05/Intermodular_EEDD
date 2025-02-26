@@ -28,7 +28,7 @@
 <body>
     <nav class="nav-secundario">
         <h3 id="titulo-looplab">LoopLab</h3>
-        <a href="../index/intermodular.html">Inicio</a>
+        <a href="../index/intermodular.php">Inicio</a>
     </nav>
     <br><br><br>
     <section id="registro" class="section">

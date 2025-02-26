@@ -1,6 +1,9 @@
+<?php
+session_start(); // Esto debe ser lo primero en el archivo
+?>
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="LogoPagina.png" type="image/x-icon" />
@@ -17,9 +20,69 @@
       href="https://fonts.googleapis.com/css2?family=Chewy&family=Rubik+Spray+Paint&display=swap"
       rel="stylesheet"
     />
+    <style>
+        /* Estilos para el contenedor de información del usuario */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto; /* Alinea a la derecha */
+        }
+
+        /* Estilos para el mensaje de bienvenida */
+        .welcome-message {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Estilos para el botón de cerrar sesión */
+        .logout-button {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Estilos para el contenedor de login y registro */
+        .login-register {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto; /* Alinea a la derecha */
+        }
+
+        /* Estilos para los botones de login y registro */
+        .login-button,
+        .register-button {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .login-button:hover,
+        .register-button:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+    </style>
     <title>Bienvenido a LoopLab</title>
-  </head>
-  <body>
+</head>
+<body>
     <header>
       <h1>
         <svg
@@ -53,7 +116,7 @@
         </svg>
       </h1>
     </header>
-    <nav>
+    <nav style="padding: 0px 40px;">
       <a href="#inicio">Inicio</a>
       <a href="#registro">Registro</a>
       <a href="../productos/instrumentales.php">Instrumentales</a>
@@ -74,6 +137,19 @@
           />
         </svg>
       </a>
+      <?php
+      if (isset($_SESSION['usuario'])) {
+          echo "<div class='user-info'>";
+          echo "<p class='welcome-message'>Bienvenido, " . $_SESSION['usuario'] . "!</p>";
+          echo "<a class='logout-button' href='logout.php'>Cerrar Sesión</a>";
+          echo "</div>";
+      } else {
+          echo "<div class='login-register'>";
+          echo '<a class="login-button" href="login.html">Iniciar Sesión</a>';
+          echo '<a class="register-button" href="registro.html">Registrarse</a>';
+          echo "</div>";
+      }
+      ?>
     </nav>
     <div class="hero">
       <p class="hero-p">
@@ -160,53 +236,6 @@
           </div>
         </section>
     </div>
-      <section id="registro" class="section">
-        <h2>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            fill="currentColor"
-            class="bi bi-person-circle"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-            <path
-              fill-rule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
-            />
-          </svg>
-          Registro de Usuario
-        </h2>
-        <form>
-          <label for="nombre"
-            >Nombre Completo: <span style="color: red">*</span></label
-          ><br /><br />
-          <input type="text" id="nombre" name="nombre" required /><br /><br />
-
-          <label for="correo"
-            >Correo Electrónico: <span style="color: red">*</span></label
-          ><br /><br />
-          <input type="email" id="correo" name="correo" required /><br /><br />
-          
-          <label for="correo"
-            >Teléfono: <span style="color: red">*</span></label
-          ><br /><br />
-          <input type="number" id="telefono" name="telefono" required /><br /><br />
-
-          <label for="contraseña"
-            >Contraseña: <span style="color: red">*</span></label
-          ><br /><br />
-          <input
-            type="password"
-            id="contraseña"
-            name="contraseña"
-            required
-          /><br /><br />
-
-          <button type="submit">Registrarse</button>
-        </form>
-      </section>
       <section id="valoraciones" class="section">
         <h2>
           <svg
