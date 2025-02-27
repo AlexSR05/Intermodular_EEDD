@@ -118,8 +118,6 @@ session_start();
               <a class="forgot-your-password" href="">¿Has olvidado tu contraseña?</a>
             </div>
             <input type="password" id="contraseña" name="contraseña" required>
-
-            <!-- Mostrar error de contraseña debajo del input -->
             <?php
             if (isset($_SESSION['error_contrasenya']) && $_SESSION['error_contrasenya'] != "") {
                 echo "<p class='error'>" . $_SESSION['error_contrasenya'] . "</p>";
