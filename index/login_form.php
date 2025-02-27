@@ -1,5 +1,9 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,32 +74,33 @@
       button:hover {
           background-color: #3e3e71;
       }
-
-      .option-register{
+      .option-register {
         font-size: 12px;
       }
-
-      #login{
+      #login {
         color: #a7a7e1;
       }
-
-      h3{
+      h3 {
         font-size: 30px;
         color: rgb(255, 230, 0);
         font-family: "Rubik Spray Paint", serif;
         font-weight: 200;
       }
-
-      .forgot-your-password{
+      .forgot-your-password {
         opacity: 0.8;
         font-size: 10px;
         color: #a7a7e1;
       }
-
-      .forgot-your-password-div{
+      .forgot-your-password-div {
         display: flex;
         align-items: center;
         justify-content: space-between;
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+        text-align: left;
       }
   </style>
 </head>
@@ -110,13 +115,26 @@
             <br><br>
             <div class="forgot-your-password-div">
               <label for="contraseña">Contraseña: <span style="color: red">*</span></label>
-              <a class="forgot-your-password" href="">¿Has olvidado tu contaseña?</a>
+              <a class="forgot-your-password" href="">¿Has olvidado tu contraseña?</a>
             </div>
             <input type="password" id="contraseña" name="contraseña" required>
+
+            <!-- Mostrar error de contraseña debajo del input -->
+            <?php
+            if (isset($_SESSION['error_contrasenya']) && $_SESSION['error_contrasenya'] != "") {
+                echo "<p class='error'>" . $_SESSION['error_contrasenya'] . "</p>";
+                $_SESSION['error_contrasenya'] = ""; // Limpiar error después de mostrarlo
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['error_usuario']) && $_SESSION['error_usuario'] != "") {
+                echo "<p class='error'>" . $_SESSION['error_usuario'] . "</p>";
+                $_SESSION['error_usuario'] = ""; // Limpiar error después de mostrarlo
+            }
+            ?>
             <br><br><br>
             <button type="submit">Iniciar Sesión</button>
             <p class="option-register">¿No tienes una cuenta? <a href="registro.html" id="login">Registrate aquí</a></p>
-
         </form>
     </section>
 </body>
