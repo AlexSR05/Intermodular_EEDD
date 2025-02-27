@@ -141,11 +141,11 @@ session_start(); // Esto debe ser lo primero en el archivo
       if (isset($_SESSION['usuario'])) {
           echo "<div class='user-info'>";
           echo "<p class='welcome-message'>Bienvenido, " . $_SESSION['usuario'] . "!</p>";
-          echo "<a class='logout-button' href='logout.php'>Cerrar Sesión</a>";
+          echo "<a class='logout-button' href='login_form.php'>Cerrar Sesión</a>";
           echo "</div>";
       } else {
           echo "<div class='login-register'>";
-          echo '<a class="login-button" href="login.html">Iniciar Sesión</a>';
+          echo '<a class="login-button" href="login_form.php">Iniciar Sesión</a>';
           echo '<a class="register-button" href="registro.html">Registrarse</a>';
           echo "</div>";
       }
