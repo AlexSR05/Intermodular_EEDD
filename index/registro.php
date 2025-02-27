@@ -23,7 +23,7 @@ $sql = "INSERT INTO usuarios (Nombre, correo, telefono, contrasenya) VALUES ('$n
 
 if ($conn->query($sql) === TRUE) {
   echo "Registro exitoso";
-  header("Location: login.html"); // Redirigir al usuario a la página de inicio de sesión
+  header("Location: login_form.php"); // Redirigir al usuario a la página de inicio de sesión
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
