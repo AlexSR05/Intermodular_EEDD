@@ -115,7 +115,7 @@ session_start();
             <br><br>
             <div class="forgot-your-password-div">
               <label for="contraseña">Contraseña: <span style="color: red">*</span></label>
-              <a class="forgot-your-password" href="">¿Has olvidado tu contraseña?</a>
+              <a class="forgot-your-password" href="../contacto/contacto.html">¿Has olvidado tu contraseña?</a>
             </div>
             <input type="password" id="contraseña" name="contraseña" required>
             <?php
