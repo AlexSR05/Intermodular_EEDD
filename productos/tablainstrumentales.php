@@ -105,9 +105,9 @@ if ($conn->connect_error) {
             echo "</tr>";
         }
         echo "</table>";
-    ?>
+    ?> 
     <br><br>
-    <a href="addinstrumentalesform.php">Insertar nueva instrumental</a>
+    <a href="panel_de_control.php">Insertar nueva instrumental</a>
 </body>
 </html>
 <?php
