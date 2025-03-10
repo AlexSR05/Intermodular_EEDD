@@ -50,6 +50,7 @@ session_start();
           display: block;
           text-align: left;
           margin-top: 10px;
+          margin-left: 10px;
       }
       input {
           width: 90%;
@@ -102,6 +103,25 @@ session_start();
         margin-top: 5px;
         text-align: left;
       }
+      .social-login {
+          margin-top: 20px;
+          margin-bottom: 80px;
+      }
+      .social-login button {
+          background-color: #ffffff;
+          color: #333;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+          margin-top: 10px;
+          font-weight: bold;
+      }
+      .social-login img {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+      }
   </style>
 </head>
 <body>
@@ -115,26 +135,31 @@ session_start();
             <br><br>
             <div class="forgot-your-password-div">
               <label for="contraseña">Contraseña: <span style="color: red">*</span></label>
-              <a class="forgot-your-password" href="">¿Has olvidado tu contraseña?</a>
+              <a class="forgot-your-password" href="../contacto/contacto.html">¿Has olvidado tu contraseña?</a>
             </div>
             <input type="password" id="contraseña" name="contraseña" required>
-
-            <!-- Mostrar error de contraseña debajo del input -->
             <?php
             if (isset($_SESSION['error_contrasenya']) && $_SESSION['error_contrasenya'] != "") {
                 echo "<p class='error'>" . $_SESSION['error_contrasenya'] . "</p>";
-                $_SESSION['error_contrasenya'] = ""; // Limpiar error después de mostrarlo
+                $_SESSION['error_contrasenya'] = ""; 
             }
             ?>
             <?php
             if (isset($_SESSION['error_usuario']) && $_SESSION['error_usuario'] != "") {
                 echo "<p class='error'>" . $_SESSION['error_usuario'] . "</p>";
-                $_SESSION['error_usuario'] = ""; // Limpiar error después de mostrarlo
+                $_SESSION['error_usuario'] = ""; 
             }
             ?>
-            <br><br><br>
+            <br><br>
             <button type="submit">Iniciar Sesión</button>
             <p class="option-register">¿No tienes una cuenta? <a href="registro.html" id="login">Registrate aquí</a></p>
+            <br>
+            <hr>
+            <div class="social-login">
+                <button onclick="window.location.href='google_auth.php'"> <!-- No hace nada de momento -->
+                    <img src="media/google_logo.png" alt="Google"> Iniciar sesión con Google
+                </button>
+            </div>
         </form>
     </section>
 </body>

@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         $conn->commit();
-        echo "<script>alert('¡Agradecemos tu valoración!'); window.location.href='intermodular.html';</script>";
+        echo "<script>alert('¡Agradecemos tu valoración!'); window.location.href='intermodular.php';</script>";
     } catch (Exception $e) {
         $conn->rollback();
         echo "Error: " . $e->getMessage();
