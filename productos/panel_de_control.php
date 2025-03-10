@@ -116,11 +116,7 @@
     </section>
 
     <section id="gestion-productos">
-<<<<<<< HEAD
         <h3>Gestión de Instrumentales (Modificar)</h3>
-=======
-        <h3>Gestión de Productos</h3>
->>>>>>> a1585a2d478378e0beec570d279e03181698a3de
         <form action="updateinstrumental.php" method="post">
             <!-- Formulario para modificar productos -->
             <select name="product_id" required>
