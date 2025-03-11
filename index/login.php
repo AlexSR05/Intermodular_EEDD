@@ -3,10 +3,9 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Conexión a la base de datos
 $servername = "127.0.0.1";
-$username = "root"; // Cambia esto por tu usuario de MySQL
-$password = ""; // Cambia esto por tu contraseña de MySQL
+$username = "root"; 
+$password = "";
 $dbname = "intermodular";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

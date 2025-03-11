@@ -21,15 +21,13 @@ session_start();
       rel="stylesheet"
     />
     <style>
-        /* Estilos para el contenedor de información del usuario */
         .user-info {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-left: auto; /* Alinea a la derecha */
+            margin-left: auto;
         }
 
-        /* Estilos para el mensaje de bienvenida */
         .welcome-message {
             font-size: 16px;
             font-weight: bold;
@@ -38,7 +36,6 @@ session_start();
             margin: 0;
         }
 
-        /* Estilos para el botón de cerrar sesión */
         .logout-button {
             text-decoration: none;
             color: #ffffff;
@@ -54,15 +51,13 @@ session_start();
             color: #000000;
         }
 
-        /* Estilos para el contenedor de login y registro */
         .login-register {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-left: auto; /* Alinea a la derecha */
+            margin-left: auto; 
         }
 
-        /* Estilos para los botones de login y registro */
         .login-button,
         .register-button {
             text-decoration: none;

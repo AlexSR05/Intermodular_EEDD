@@ -269,6 +269,7 @@ if ($conn->connect_error) {
 
         $sql = "
             SELECT 
+                i.ID,
                 i.Titulo, 
                 i.BPM, 
                 i.FechaCreacion, 
@@ -301,7 +302,9 @@ if ($conn->connect_error) {
                         <li><strong>BPM:</strong> <br><i><?php echo $row["BPM"]; ?></i></li>
                         <li><strong>Género:</strong> <br><i><?php echo $row["Genero"]; ?></i></li>
                     </ul>
-                    <img src="<?php echo $row["Imagen"];?>" alt="Imagen de la instrumental no encontrada.">
+                    <a href="instrumental.php?id=<?php echo htmlspecialchars($row['ID']); ?>">
+                        <img src="<?php echo $row["Imagen"]; ?>" alt="Imagen de la instrumental no encontrada.">
+                    </a>
                     <p><strong><u style=
                         "font-family: 'Rubik Spray Paint', serif;
                         color: #ffd700;
