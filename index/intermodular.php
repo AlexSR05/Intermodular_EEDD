@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "intermodular";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -73,6 +84,74 @@ session_start();
         .register-button:hover {
             background-color: #ffffff;
             color: #000000;
+        }
+      
+        .instrumentales{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .instrumental {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgb(50, 50, 99);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 18px rgba(0, 0, 0, 0.45);
+            width: 100%;
+            max-width: 300px;
+            margin: 15px auto;
+            text-align: center;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .instrumental ul {
+            list-style-type: none;
+            padding: 10px;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+            line-height: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(50px, 3fr));
+            justify-self: center;
+            gap: 10px;
+        }
+
+        .instrumental ul li {
+            padding: 5px 0;
+            font-size: 14px;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .instrumental img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover; 
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .instrumental audio {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .precio-carrito{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 100px;
+            margin-top: 20px;
+            align-items: center;
         }
     </style>
     <title>Bienvenido a LoopLab</title>
@@ -153,6 +232,74 @@ session_start();
         <span style="color: #7afa7a">comparte</span> las mejores instrumentales
         del momento.
       </p>
+    </div>
+    <div class="instrumentales">
+        <?php
+        $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+
+        $sql = "
+            SELECT 
+                i.ID,
+                i.Titulo, 
+                i.BPM, 
+                i.FechaCreacion, 
+                i.Imagen,
+                i.audio,
+                i.precio,
+                gm.Nombre AS Genero,
+                prod.Nombre AS NombreProductor
+            FROM 
+                instrumentales i
+            JOIN 
+                pertenecer p ON i.ID = p.ID_Instrumental
+            JOIN 
+                genero_musical gm ON p.ID_Genero = gm.ID
+            JOIN 
+                productores prod ON prod.ID = i.ID_Productor
+            WHERE 
+                i.Titulo LIKE '%$search%' 
+                OR gm.Nombre LIKE '%$search%'
+                OR prod.Nombre LIKE '%$search%'
+                OR i.BPM LIKE '%$search%' ORDER BY i.ID LIMIT 4;
+        ";
+
+        $result = $conn->query($sql);?>
+        <?php if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) { ?>
+                <div class="instrumental">
+                    <ul>
+                        <li><strong>Título:</strong> <br><i><?php echo $row["Titulo"]; ?></i></li>
+                        <li><strong>BPM:</strong> <br><i><?php echo $row["BPM"]; ?></i></li>
+                        <li><strong>Género:</strong> <br><i><?php echo $row["Genero"]; ?></i></li>
+                    </ul>
+                    <a href="../productos/instrumental.php?id=<?php echo htmlspecialchars($row['ID']); ?>">
+                        <img src="../productos/<?php echo $row["Imagen"]; ?>" alt="Imagen de la instrumental no encontrada.">
+                    </a>
+                    <p><strong><u style=
+                        "font-family: 'Rubik Spray Paint', serif;
+                        color: #ffd700;
+                        font-weight: 20;
+                        letter-spacing: 1px">
+                        Made By:</u></strong><br><br><i><?php echo $row["NombreProductor"]; ?></i></p>
+                    <p id="instrumental-date"><i><?php echo $row["FechaCreacion"]; ?></i></p>
+                    <audio controls class="custom-audio" oncontextmenu="return false;">
+                        <source src="<?php echo $row["audio"];?>" type="audio/mp3">
+                        No se ha podido cargar o tu navegador no soporta el elemento de audio.
+                    </audio>
+                    <div class="precio-carrito">
+                        <p style="font-family: Clarkson, Helvetica, sans-serif;font-size: 14px; margin: 10px;"><b>Precio:</b><br><?php echo number_format($row["precio"], 2, '.', '');?> €</p>
+                        <button class="button-48" 
+                            data-title="<?php echo $row['Titulo']; ?>" 
+                            data-price="<?php echo number_format($row['precio'], 2, '.', ''); ?>" 
+                            data-bpm="<?php echo $row['BPM']; ?>"
+                            data-image="<?php echo $row['Imagen']; ?>">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div> 
+        <?php }} else {
+             echo "<h3 style='font-size: 14px;'> No se han encontrado instrumentales relativas a tu búsqueda.</h3>";
+        } ?>
     </div>
     <div class="container-div">
       <div class="container">
