@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         $conn->commit();
-        echo "<script>alert('Gracias por ponerte en contacto con nosotros.'); window.location.href='../index/intermodular.php';</script>";
+        echo "<script>alert('Gracias por ponerte en contacto con nosotros.'); window.location.href='../index/index.php';</script>";
     } catch (Exception $e) {
         $conn->rollback();
         echo "Error: " . $e->getMessage();

@@ -77,7 +77,7 @@
             <li><a href="#gestion-instrumentales">Gestión de Instrumentales</a></li>
             <li><a href="#gestion-usuarios">Gestión de Usuarios</a></li>
             <li><a href="#gestion-productos">Gestión de Productos</a></li>
-            <li><a href="../index/intermodular.php">Inicio</a></li>
+            <li><a href="../index/index.php">Inicio</a></li>
         </ul>
     </nav>
     

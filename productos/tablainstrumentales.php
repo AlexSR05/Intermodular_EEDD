@@ -83,7 +83,7 @@ if ($conn->connect_error) {
 <body>
     <nav class="nav-secundario">
         <h3 id="titulo-looplab">LoopLab</h3>
-        <a href="../index/intermodular.php">Inicio</a>
+        <a href="../index/index.php">Inicio</a>
     </nav>
     <br><br><br>
     <h2>Últimas 10 Instrumentales insertadas</h2>

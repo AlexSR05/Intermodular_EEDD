@@ -93,6 +93,8 @@ if ($conn->connect_error) {
             gap: 20px;
             flex-wrap: wrap;
             margin-top: 20px;
+            margin-left: 15px;
+            margin-right: 15px;
         }
 
         .instrumental {
@@ -192,7 +194,6 @@ if ($conn->connect_error) {
     </header>
     <nav style="padding: 0px 40px;">
       <a href="#inicio">Inicio</a>
-      <a href="#registro">Registro</a>
       <a href="../productos/instrumentales.php">Instrumentales</a>
       <a href="#valoraciones">Valóranos</a>
       <a href="#colaboraciones">Colaboraciones</a>
@@ -260,7 +261,7 @@ if ($conn->connect_error) {
                 i.Titulo LIKE '%$search%' 
                 OR gm.Nombre LIKE '%$search%'
                 OR prod.Nombre LIKE '%$search%'
-                OR i.BPM LIKE '%$search%' ORDER BY i.ID LIMIT 4;
+                OR i.BPM LIKE '%$search%' ORDER BY i.FechaCreacion DESC LIMIT 4;
         ";
 
         $result = $conn->query($sql);?>
@@ -283,18 +284,11 @@ if ($conn->connect_error) {
                         Made By:</u></strong><br><br><i><?php echo $row["NombreProductor"]; ?></i></p>
                     <p id="instrumental-date"><i><?php echo $row["FechaCreacion"]; ?></i></p>
                     <audio controls class="custom-audio" oncontextmenu="return false;">
-                        <source src="<?php echo $row["audio"];?>" type="audio/mp3">
+                        <source src="../productos/<?php echo $row["audio"];?>" type="audio/mp3">
                         No se ha podido cargar o tu navegador no soporta el elemento de audio.
                     </audio>
                     <div class="precio-carrito">
                         <p style="font-family: Clarkson, Helvetica, sans-serif;font-size: 14px; margin: 10px;"><b>Precio:</b><br><?php echo number_format($row["precio"], 2, '.', '');?> €</p>
-                        <button class="button-48" 
-                            data-title="<?php echo $row['Titulo']; ?>" 
-                            data-price="<?php echo number_format($row['precio'], 2, '.', ''); ?>" 
-                            data-bpm="<?php echo $row['BPM']; ?>"
-                            data-image="<?php echo $row['Imagen']; ?>">
-                            Añadir al carrito
-                        </button>
                     </div>
                 </div> 
         <?php }} else {

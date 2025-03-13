@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['correo']) && isset($_P
         if (password_verify($contrasenya, $row['contrasenya'])) {
             // Iniciar sesión y redirigir
             $_SESSION['usuario'] = $row['Nombre'];
-            header("Location: intermodular.php");
+            header("Location: index.php");
             exit();
         } else {
             $_SESSION['error_contrasenya'] = "Contraseña incorrecta.";
